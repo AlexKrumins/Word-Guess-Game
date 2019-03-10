@@ -14,8 +14,9 @@
     <div id="display"></div>
     <p id="answer-length"></p>
     <p>Guess the word correctly, please.</p>
+    <p>Only <span id="unguessed-letters"></span> letters left to go...</p>
     <div id="buttons"></div>
-    <p>Number of Guesses remaining</p>
+    <p>Number of Allowable Mistakes remaining</p>
     <p id="remaining-guesses"></p>
     <p>Letters you have guessed that were incorrect</p>
     <p id="wrong-guesses"></p>
@@ -23,6 +24,7 @@
     <p id="pardons"></p>
     <p>Executions</p>
     <p id="executions"></p>
+    <button id=newGameButton>New Game</button>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -36,7 +38,7 @@
             //         .text(letter);
             //         $('#buttons').append(letterBtn);
             //     });
-            var wordChoice = ["zydog"];
+            var wordChoice = ["zydog", "crabapple",];
             var ChosenWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
             var answerArray = [];
             var wrongGuesses = [];
@@ -44,17 +46,30 @@
                 answerArray[i] = "-";
             };
             var remainingGuesses = 8;
-            var unguessedLetters = ChosenWord.Length;
+            var unguessedLetters = ChosenWord.length;
             var pardons = 0;
             var executions = 0;
             // var letterPickText = document.getElementById("letterpick-text");
             // var ChosenWordText = document.getElementById("chosenword-text");
             var answerArrayText = document.getElementById("answer-length");
+            var unguessedLettersText = document.getElementById("unguessed-letters");
             var remainingGuessesText = document.getElementById("remaining-guesses");
             var wrongGuessesText = document.getElementById("wrong-guesses");
             var pardonsText = document.getElementById("pardons");
             var executionsText = document.getElementById("executions");
             
+            function newGame() {
+                ChosenWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
+                answerArray = [];
+                wrongGuesses = [];
+                remainingGuesses = 8;
+                unguessedLetters = ChosenWord.length;
+                for (var i=0; i<ChosenWord.length; i++) {
+                answerArray[i] = "-";
+            };
+
+                $("#answer-length, #unguessed-letters, #remaining-guesses, #wrong-guesses").empty();
+            };
             
             answerArrayText.textContent = answerArray[i];
                 
@@ -70,10 +85,8 @@
 
                 var enterGuess = event.key;
                 
-                if ((enterGuess === "a", "b", "c", "d", "e", "f", "g", "h", " i", "j", "k", "l", "m", "n", "o","p", "q", "r","s", "t", "u", "v", "w", "x", "y", "z") && (!wrongGuesses.includes(enterGuess))) {
+                if(((enterGuess === "a", "b", "c", "d", "e", "f", "g", "h", " i", "j", "k", "l", "m", "n", "o","p", "q", "r","s", "t", "u", "v", "w", "x", "y", "z")) && (!wrongGuesses.includes(enterGuess))) {
                     
-                    answerArrayText.textContent = answerArray.join("");
-
                     for (var j = 0; j < ChosenWord.length; j++) {
                         if (!ChosenWord.includes(enterGuess)) {
                             wrongGuesses.push(enterGuess);
@@ -81,23 +94,26 @@
                             console.log(enterGuess);
                             remainingGuesses--;
                             remainingGuessesText.textContent = remainingGuesses;
-
+                            
                             break
                             
-                        } else if (ChosenWord[j] === enterGuess) {
+                        } else if ((ChosenWord[j] === enterGuess) && (!answerArrayText.textContent.includes(enterGuess))) {
                             answerArray[j] = enterGuess;
                             unguessedLetters--;
                         };
-                    };
-                    
+                    };    
+                    answerArrayText.textContent = answerArray.join("");
+                    unguessedLettersText.textContent = (unguessedLetters);
                 };
                 if (unguessedLetters<1){
-                    alert("Congratulations! You live to see another day.");
+                    var t = confirm("Congratulations! You live to see another day.");
+                    if (t == true) {newGame()};
                     pardons++;
                     pardonsText.textContent = pardons;
-                }
+                };
                 if (remainingGuesses<1){
-                    alert("You Have Been Hanged for Guessing Poorly");
+                    var r = confirm ("You Have Been Hanged for Guessing Poorly");
+                    if (r == true) {newGame()};
                     executions++;
                     executionsText.textContent = executions;
                 };
