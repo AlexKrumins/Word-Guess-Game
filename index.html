@@ -50,11 +50,15 @@
     var answerLengthText = document.getElementById("answer-length");
     
     answerLengthText.textContent = answerLength[i];
-    document.onkeyup = function (event) {
+    //$('button).bind('click keyup', function(event) {}
+    document.onkeyup = checkGuess();
+    button.onclick = checkGuess();
+    function checkGuess() {
         var enterGuess = event.key;
-        if (enterGuess.toUpperCase === "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z") {
+            //PHP ALT CODE** <?php $letters = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");if (in_array(enterGuess.toUpperCase, letters)) {};
+        if (enterGuess.toUpperCase === "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ) {
             answerLengthText.textContent = answerLength.join("");
-            for(var j=0; j < ChosenWord.length, j++){
+            for (var j=0; j < ChosenWord.length; j++) {
                 if (ChosenWord[j] === enterGuess) {
                     answerLength[j] = enterGuess;
                     unguessedLetters--;
