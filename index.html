@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Hangman Execution</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets\css\style.css">
 </head>
 <body>
     <h1>Hangman: The Game</h1>
     <h2>Special "Everybody Wins" Edition</h2>
+    <p>Press any letter to venture a guess.</p>
     <div id="display"></div>
     <p id="answer-length"></p>
     <p>Guess the word correctly, please.</p>
-    <p>Press any letter to venture a guess.</p>
     <div id="buttons"></div>
     <p>Number of Guesses remaining</p>
     <p id="remaining-guesses"></p>
@@ -23,53 +23,87 @@
     <p id="pardons"></p>
     <p>Executions</p>
     <p id="executions"></p>
-    
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
-    var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-        letters.forEach(function(letter) {
-            var letterBtn = $('<button>')
-            .data('letter', letter.toUpperCase())
-            .text(letter);
-            $('#buttons').append(letterBtn);
-        });
-    
-    var WordChoices = ["The Quick Brown Fox Jumps Over The Lazy Dog"];
-    var ChosenWord = WordChoices[Math.floor(Math.random() * Wordchoices.length)];
 
-    var answerLength = [];
-        for (var i=0; i<ChosenWord.length; i++) {
-            answerLength[i] = "_";
-        };
+        $(document).ready(function() {
+            // BUTTON ARRAY CODE **
+            // var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+            //     letters.forEach(function(letter) {
+            //     var letterBtn = $('<button>')
+            //         .data('letter', letter.toUpperCase())
+            //         .text(letter);
+            //         $('#buttons').append(letterBtn);
+            //     });
+            var wordChoice = ["zydog"];
+            var ChosenWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
+            var answerArray = [];
+            var wrongGuesses = [];
+            for (var i=0; i<ChosenWord.length; i++) {
+                answerArray[i] = "-";
+            };
+            var remainingGuesses = 8;
+            var unguessedLetters = ChosenWord.Length;
+            var pardons = 0;
+            var executions = 0;
+            // var letterPickText = document.getElementById("letterpick-text");
+            // var ChosenWordText = document.getElementById("chosenword-text");
+            var answerArrayText = document.getElementById("answer-length");
+            var remainingGuessesText = document.getElementById("remaining-guesses");
+            var wrongGuessesText = document.getElementById("wrong-guesses");
+            var pardonsText = document.getElementById("pardons");
+            var executionsText = document.getElementById("executions");
+            
+            
+            answerArrayText.textContent = answerArray[i];
+                
+            //function newGame() {};//
+            
+            //JQuery ALT CODE ** $('button).bind('click keyup', function(event) {}//
 
-    var unguessedLetters = ChosenWord.Length;
+            document.onkeyup = function(event) {checkGuess()};
 
-    var letterPickText = document.getElementById("letterpick-text");
-    var ChosenWordText = document.getElementById("chosenword-text");
-    var answerLengthText = document.getElementById("answer-length");
-    
-    answerLengthText.textContent = answerLength[i];
-    //$('button).bind('click keyup', function(event) {}
-    document.onkeyup = checkGuess();
-    button.onclick = checkGuess();
-    function checkGuess() {
-        var enterGuess = event.key;
-            //PHP ALT CODE** <?php $letters = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");if (in_array(enterGuess.toUpperCase, letters)) {};
-        if (enterGuess.toUpperCase === "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ) {
-            answerLengthText.textContent = answerLength.join("");
-            for (var j=0; j < ChosenWord.length; j++) {
-                if (ChosenWord[j] === enterGuess) {
-                    answerLength[j] = enterGuess;
-                    unguessedLetters--;
+            //BUTTON ARRAY CODE ** document.getElementsByTagName("button").onclick = function(event) {checkGuess()};
+
+            function checkGuess() {
+
+                var enterGuess = event.key;
+                
+                if ((enterGuess === "a", "b", "c", "d", "e", "f", "g", "h", " i", "j", "k", "l", "m", "n", "o","p", "q", "r","s", "t", "u", "v", "w", "x", "y", "z") && (!wrongGuesses.includes(enterGuess))) {
+                    
+                    answerArrayText.textContent = answerArray.join("");
+
+                    for (var j = 0; j < ChosenWord.length; j++) {
+                        if (!ChosenWord.includes(enterGuess)) {
+                            wrongGuesses.push(enterGuess);
+                            wrongGuessesText.textContent = wrongGuesses;
+                            console.log(enterGuess);
+                            remainingGuesses--;
+                            remainingGuessesText.textContent = remainingGuesses;
+
+                            break
+                            
+                        } else if (ChosenWord[j] === enterGuess) {
+                            answerArray[j] = enterGuess;
+                            unguessedLetters--;
+                        };
+                    };
+                    
+                };
+                if (unguessedLetters<1){
+                    alert("Congratulations! You live to see another day.");
+                    pardons++;
+                    pardonsText.textContent = pardons;
+                }
+                if (remainingGuesses<1){
+                    alert("You Have Been Hanged for Guessing Poorly");
+                    executions++;
+                    executionsText.textContent = executions;
                 };
             };
-
-        };
-    };
-    });
+        });
     </script>
-</body>
-<script src="assets\javascript\game.js"></script>
 
+</body>
 </html>
