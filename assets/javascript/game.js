@@ -8,7 +8,7 @@
             //         .text(letter);
             //         $('#buttons').append(letterBtn);
             //     });
-            var wordChoice = ["zydog", "crabapple",];
+            var wordChoice = ["balloon", "crabapple", "sandwiches", "ribbon", "bird", "information", "trapeze", "nosedive",];
             var ChosenWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
             var answerArray = [];
             var wrongGuesses = [];
@@ -25,6 +25,7 @@
             var wrongGuessesText = document.getElementById("wrong-guesses");
             var pardonsText = document.getElementById("pardons");
             var executionsText = document.getElementById("executions");
+            var gallows = $('img');
             
             function newGame() {
                 ChosenWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
@@ -33,12 +34,13 @@
                 remainingGuesses = 9;
                 unguessedLetters = ChosenWord.length;
                 for (var i=0; i<ChosenWord.length; i++) {
-                answerArray[i] = "-";
-            };
-
+                    answerArray[i] = "-";
+                };
+                
                 $("#answer-length, #unguessed-letters, #remaining-guesses, #wrong-guesses").empty();
                 $('#wrong-guesses').text('-');
-                $('#remainingGuesses').text('9');
+                $('#remaining-guesses').text('9');
+                $('img').animate({height: "100%"});
             };
             
             answerArrayText.textContent = answerArray[i];
@@ -66,7 +68,7 @@
                             console.log(enterGuess);
                             remainingGuesses--;
                             remainingGuessesText.textContent = remainingGuesses;
-                            
+                            gallows.animate({height: "+=10px"})
                             break
                             
                         } else if ((ChosenWord[j] === enterGuess) && (!answerArrayText.textContent.includes(enterGuess))) {

@@ -9,40 +9,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="assets\css\style.css">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Reenie+Beanie" rel="stylesheet">
-
-    <style>
-    body {
-    background-color:grey;
-    margin-left: 10px;
-}
-    h1, h2 {
-        font-family: 'Permanent Marker', cursive;
-        text-align: center;
-    }
-    p {
-        font-family: 'Permanent Marker', cursive;
-        font-size:20px;
-        font-weight: bold;
-        text-align: left; 
-    }
-    #wrong-guesses {
-        font-family: 'Permanent Marker', cursive;
-        line-height: 34px;
-        font-size: 30px;
-    }
-    #answer-length {
-        font-family: 'Permanent Marker', cursive;
-        font-size: 30px;
-    }
-    #pardons {
-        color: teal;
-        font-size: 30px;
-    }
-    #executions {
-        color: maroon;
-        font-size: 30px;
-    }
-    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -60,13 +26,13 @@
                 <p>Number of Allowable Mistakes remaining:  <span id="remaining-guesses">9</span></p>
                 <p>Letters you have guessed that were incorrect</p>
                 <p id="wrong-guesses">-</p>
-                <p id="ppardons">Pardons:   <span id="pardons">0</span></p>
+                <p>Pardons:   <span id="pardons">0</span></p>
                 <p>Executions:  <span id="executions">0</span></p>
                 <button type="button" class="btn btn-danger" id=newGameButton>New Game</button>
             </div>
             <div class="col">
                 <div id="display">
-
+                    <img src=assets\images\gallows_gallery_by_ktostam.jpg class="img-fluid">  
                 </div>
             </div>
         </div>
