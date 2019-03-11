@@ -15,7 +15,7 @@
             for (var i=0; i<ChosenWord.length; i++) {
                 answerArray[i] = "-";
             };
-            var remainingGuesses = 8;
+            var remainingGuesses = 9;
             var unguessedLetters = ChosenWord.length;
             var pardons = 0;
             var executions = 0;
@@ -30,13 +30,15 @@
                 ChosenWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
                 answerArray = [];
                 wrongGuesses = [];
-                remainingGuesses = 8;
+                remainingGuesses = 9;
                 unguessedLetters = ChosenWord.length;
                 for (var i=0; i<ChosenWord.length; i++) {
                 answerArray[i] = "-";
             };
 
                 $("#answer-length, #unguessed-letters, #remaining-guesses, #wrong-guesses").empty();
+                $('#wrong-guesses').text('-');
+                $('#remainingGuesses').text('9');
             };
             
             answerArrayText.textContent = answerArray[i];
@@ -76,7 +78,7 @@
                     unguessedLettersText.textContent = (unguessedLetters);
                 };
                 if (unguessedLetters<1){
-                    var t = confirm("Congratulations! You live to see another day.");
+                    var t = confirm("Congratulations! It was '" + ChosenWord + "!' You live to see another day.");
                     if (t == true) {newGame()};
                     pardons++;
                     pardonsText.textContent = pardons;
