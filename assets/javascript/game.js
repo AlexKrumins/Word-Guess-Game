@@ -1,13 +1,27 @@
 
         $(document).ready(function() {
-            // BUTTON ARRAY CODE **
+            
             // var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-            //     letters.forEach(function(letter) {
-            //     var letterBtn = $('<button>')
-            //         .data('letter', letter.toUpperCase())
-            //         .text(letter);
-            //         $('#buttons').append(letterBtn);
-            //     });
+            // for (var i = 0; i < letters.length; i++) {
+
+            //     // Inside the loop...
+        
+            //     // 2. Create a variable named "letterBtn" equal to $("<button>");
+            //     var letterBtn = $("<button>");
+        
+            //     // 3. Then give each "letterBtn" the following classes: "letter-button" "letter" "letter-button-color".
+            //     letterBtn.addClass("letter-button letter letter-button-color");
+        
+            //     // 4. Then give each "letterBtn" a data-attribute called "data-letter".
+            //     letterBtn.data("letter", letters[i]);
+        
+            //     // 5. Then give each "letterBtns" a text equal to "letters[i]".
+            //     letterBtn.text(letters[i]);
+        
+            //     // 6. Finally, append each "letterBtn" to the "#buttons" div (provided).
+            //     $("#buttons").append(letterBtn);
+        
+            //   }
             var wordChoice = ["balloon", "crabapple", "sandwiches", "ribbon", "bird", "information", "trapeze", "nosedive",];
             var ChosenWord = wordChoice[Math.floor(Math.random() * wordChoice.length)];
             var answerArray = [];
@@ -54,19 +68,23 @@
             });
                 
             var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o","p", "q", "r","s", "t", "u", "v", "w", "x", "y", "z"];
-            //JQuery ALT CODE ** $('button).bind('click keyup', function(event) {}//
+            // $('button').onclick(function(event)) {
+            //     var enterGuess = (this.data);
+            //     };
+            
             document.onkeyup = function(event) {
                 if (alphabet.includes(event.key)) {
+
+                    var enterGuess = event.key;
                     checkGuess();
                   } else {
                     alert('Please select a valid letter.');
-                  }
+                  };
 
             //BUTTON ARRAY CODE ** document.getElementsByTagName("button").onclick = function(event) {checkGuess()};
 
             function checkGuess() {
 
-                var enterGuess = event.key;
                 
                 if(((enterGuess === "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o","p", "q", "r","s", "t", "u", "v", "w", "x", "y", "z")) && (!wrongGuesses.includes(enterGuess))) {
                     
@@ -89,6 +107,7 @@
                     unguessedLettersText.textContent = (unguessedLetters);
                 };
                 if (unguessedLetters<1){
+                    answerArrayText.textContent = ChosenWord;
                     var t = confirm("Congratulations! It was '" + ChosenWord + "!' You live to see another day.");
                     if (t == true) {newGame()};
                     pardons++;
