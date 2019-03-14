@@ -15,6 +15,8 @@
             for (var i=0; i<ChosenWord.length; i++) {
                 answerArray[i] = "-";
             };
+            // Recommendation from Byron that did NOT work    answerArray = Array(ChosenWord.length).fill("-");
+
             var remainingGuesses = 9;
             var unguessedLetters = ChosenWord.length;
             var pardons = 0;
@@ -33,9 +35,11 @@
                 wrongGuesses = [];
                 remainingGuesses = 9;
                 unguessedLetters = ChosenWord.length;
-                for (var i=0; i<ChosenWord.length; i++) {
-                    answerArray[i] = "-";
-                };
+
+                // for (var i=0; i<ChosenWord.length; i++) {
+                //     answerArray[i] = "-";
+                // };
+                answerArray = Array(ChosenWord.length).fill("-");
                 
                 $("#answer-length, #unguessed-letters, #remaining-guesses, #wrong-guesses").empty();
                 $('#wrong-guesses').text('-');
@@ -49,9 +53,14 @@
                 newGame();
             });
                 
-            
+            var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o","p", "q", "r","s", "t", "u", "v", "w", "x", "y", "z"];
             //JQuery ALT CODE ** $('button).bind('click keyup', function(event) {}//
-            document.onkeyup = function(event) {checkGuess()};
+            document.onkeyup = function(event) {
+                if (alphabet.includes(event.key)) {
+                    checkGuess();
+                  } else {
+                    alert('Please select a valid letter.');
+                  }
 
             //BUTTON ARRAY CODE ** document.getElementsByTagName("button").onclick = function(event) {checkGuess()};
 
@@ -59,7 +68,7 @@
 
                 var enterGuess = event.key;
                 
-                if(((enterGuess === "a", "b", "c", "d", "e", "f", "g", "h", " i", "j", "k", "l", "m", "n", "o","p", "q", "r","s", "t", "u", "v", "w", "x", "y", "z")) && (!wrongGuesses.includes(enterGuess))) {
+                if(((enterGuess === "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o","p", "q", "r","s", "t", "u", "v", "w", "x", "y", "z")) && (!wrongGuesses.includes(enterGuess))) {
                     
                     for (var j = 0; j < ChosenWord.length; j++) {
                         if (!ChosenWord.includes(enterGuess)) {
@@ -92,5 +101,5 @@
                     executionsText.textContent = executions;
                 };
             };
-        });
+        };})
 
