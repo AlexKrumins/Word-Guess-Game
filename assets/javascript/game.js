@@ -27,7 +27,6 @@ $(document).ready(function() {
         $('#remaining-guesses').text('9');
         $('img').animate({height: "100%"});
     };           
-    answerArrayText.textContent = answerArray[i];               
     $("#newGameButton").click(function() {
         newGame();
     });           
